@@ -9,10 +9,10 @@
 
   function menuConfig(menuService) {
     menuService.addMenuItem('topbar', {
-      title: 'Admin',
+      title: 'Management',
       state: 'admin',
       type: 'dropdown',
-      roles: ['admin']
+      roles: ['manager', 'admin']
     });
   }
 }());

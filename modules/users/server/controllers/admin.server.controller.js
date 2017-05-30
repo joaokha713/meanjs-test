@@ -119,7 +119,7 @@ exports.userByID = function (req, res, next, id) {
       return next(new Error('Failed to load user ' + id));
     }
 
-    if (req.user.roles.indexOf('manager') !== -1 && user.manager !== req.user.id) {
+    if (req.user.roles.indexOf('manager') !== -1 && !user.manager.equals(req.user._id)) {
       return res.status(403).json({
         message: 'User is not authorized'
       });

@@ -9,14 +9,14 @@
 
   function menuConfig(menuService) {
     menuService.addMenu('account', {
-      roles: ['user']
+      roles: ['user', 'manager']
     });
 
     menuService.addMenuItem('account', {
       title: '',
       state: 'settings',
       type: 'dropdown',
-      roles: ['user']
+      roles: ['user', 'manager']
     });
 
     menuService.addSubMenuItem('account', 'settings', {
