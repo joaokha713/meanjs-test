@@ -1,17 +1,18 @@
-(function () {
+﻿(function () {
   'use strict';
 
+  // Configuring the Runnings Admin module
   angular
-    .module('users.admin')
+    .module('runnings')
     .run(menuConfig);
 
   menuConfig.$inject = ['menuService'];
 
   function menuConfig(menuService) {
     menuService.addMenuItem('topbar', {
-      title: 'Manage Users',
-      state: 'admin.users',
-      roles: ['manager', 'admin']
+      title: 'Manage Records',
+      state: 'runnings.list',
+      roles: ['user', 'admin']
     });
   }
 }());

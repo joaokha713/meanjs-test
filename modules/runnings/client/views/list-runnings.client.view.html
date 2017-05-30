@@ -1,0 +1,39 @@
+﻿<section>
+  <div class="page-header">
+    <h1>
+      Records
+      <a class="btn btn-primary pull-right" data-ui-sref="runnings.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </h1>
+  </div>
+  <div>
+    <table class="table table-hover table-condensed">
+      <thead>
+        <tr>
+          <th>username</th>
+          <th>date</th>
+          <th>distance (km)</th>
+          <th>duration (minutes)</th>
+          <th>avg speed</th>
+          <th>actions<th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="running in vm.runnings">
+          <td>{{running.user ? running.user.displayName : 'Deleted User'}}</td>
+          <td>{{running.date | date:'mediumDate'}}</td>
+          <td>{{running.distance}}</td>
+          <td>{{running.duration}}</td>
+          <td>{{running.distance / running.duration * 60 | number:2}} km/h</td>
+          <td>
+            <a data-ui-sref="runnings.edit({runningId: running._id})" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="runnings.$resolved && !runnings.length">
+    No records yet, why don't you <a data-ui-sref="runnings.create">create one</a>?
+  </div>
+</section>

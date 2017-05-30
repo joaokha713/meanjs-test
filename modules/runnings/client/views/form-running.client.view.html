@@ -1,0 +1,48 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.running._id ? 'Edit Record' : 'New Record'}}</h1>
+  </div>
+  <div class="pull-right">
+    <a ng-show="vm.running._id" class="btn btn-primary" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.runningForm" class="form-horizontal" ng-submit="vm.save(vm.form.runningForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="date">Date</label>
+          <p class="input-group">
+            <input type="text" id="date" name="date" class="form-control" uib-datepicker-popup ng-model="vm.date" is-open="vm.datepicker.opened" datepicker-options="vm.dateOptions" ng-required="true" close-text="Close" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="vm.openDatepicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+          <div ng-messages="vm.form.runningForm.date.$error" role="alert">
+            <p class="help-block error-text">Date is in wrong format.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="distance">Distance (km)</label>
+          <input name="distance" type="text" ng-model="vm.running.distance" id="distance" class="form-control" placeholder="Distance" required autofocus>
+          <div ng-messages="vm.form.runningForm.distance.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Distance is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="distance">Duration (minutes)</label>
+          <input name="duration" type="text" ng-model="vm.running.duration" id="duration" class="form-control" placeholder="Duration" required autofocus>
+          <div ng-messages="vm.form.runningForm.duration.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Duration is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">{{vm.running._id ? 'Update' : 'Create'}}</button>
+          <a class="btn btn-default" ui-sref="runnings.list">
+            Cancel
+          </a>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>
