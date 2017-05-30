@@ -19,6 +19,18 @@
           pageTitle: 'Users List'
         }
       })
+      .state('admin.user-create', {
+        url: '/users/create',
+        templateUrl: '/modules/users/client/views/admin/edit-user.client.view.html',
+        controller: 'UserController',
+        controllerAs: 'vm',
+        resolve: {
+          userResolve: newUser
+        },
+        data: {
+          pageTitle: 'New User'
+        }
+      })
       .state('admin.user', {
         url: '/users/:userId',
         templateUrl: '/modules/users/client/views/admin/view-user.client.view.html',
@@ -50,6 +62,12 @@
       return AdminService.get({
         userId: $stateParams.userId
       }).$promise;
+    }
+
+    newUser.$inject = ['AdminService'];
+
+    function newUser(AdminService) {
+      return new AdminService();
     }
   }
 }());

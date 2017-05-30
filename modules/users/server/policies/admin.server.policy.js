@@ -4,6 +4,8 @@
  * Module dependencies
  */
 var acl = require('acl');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
 
 // Using the memory backend
 acl = new acl(new acl.memoryBackend());
@@ -13,7 +15,7 @@ acl = new acl(new acl.memoryBackend());
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
-    roles: ['admin'],
+    roles: ['admin', 'manager'],
     allows: [{
       resources: '/api/users',
       permissions: '*'

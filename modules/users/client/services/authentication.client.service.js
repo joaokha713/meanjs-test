@@ -14,6 +14,12 @@
       user: $window.user
     };
 
+    if (auth.user && auth.user.roles) {
+      Object.assign(auth.user, {
+        isAdmin: auth.user.roles.indexOf('admin') > -1
+      });
+    }
+
     return auth;
   }
 }());

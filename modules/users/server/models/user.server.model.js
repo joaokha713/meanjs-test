@@ -106,10 +106,14 @@ var UserSchema = new Schema({
   roles: {
     type: [{
       type: String,
-      enum: ['user', 'admin']
+      enum: ['user', 'manager', 'admin']
     }],
     default: ['user'],
     required: 'Please provide at least one role'
+  },
+  manager: {
+    type: Schema.ObjectId,
+    ref: 'User'
   },
   updated: {
     type: Date
