@@ -1,13 +1,48 @@
 ﻿<section>
   <div class="page-header">
     <h1>
-      Records
+      Record List
       <a class="btn btn-primary pull-right" data-ui-sref="runnings.create">
         <i class="glyphicon glyphicon-plus"></i>
       </a>
     </h1>
   </div>
+  <form name="vm.form.filterForm" ng-submit="vm.filter(vm.form.filterForm.$valid)" novalidate>
+    <h3>Filter</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group" show-errors>
+          <label class="control-label" for="date">Start Date</label>
+          <p class="input-group">
+            <input type="text" id="date" name="date" class="form-control" uib-datepicker-popup ng-model="vm.startDate" is-open="vm.datepicker.startDateOpened" datepicker-options="vm.dateOptions" ng-required="true" close-text="Close" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="vm.openDatepicker('startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+          <div ng-messages="vm.form.filterForm.date.$error" role="alert">
+            <p class="help-block error-text">Date is in wrong format.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group" show-errors>
+          <label class="control-label" for="date">End Date</label>
+          <p class="input-group">
+            <input type="text" id="date" name="date" class="form-control" uib-datepicker-popup ng-model="vm.endDate" is-open="vm.datepicker.endDateOpened" datepicker-options="vm.dateOptions" ng-required="true" close-text="Close" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="vm.openDatepicker('endDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+          <div ng-messages="vm.form.filterForm.date.$error" role="alert">
+            <p class="help-block error-text">Date is in wrong format.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+  </form>
   <div>
+    <h3>Records</h3>
     <table class="table table-hover table-condensed">
       <thead>
         <tr>
@@ -20,7 +55,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="running in vm.runnings">
+        <tr ng-repeat="running in vm.filteredRunnings">
           <td>{{running.user ? running.user.displayName : 'Deleted User'}}</td>
           <td>{{running.date | date:'mediumDate'}}</td>
           <td>{{running.distance}}</td>

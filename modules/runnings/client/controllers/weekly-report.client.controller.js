@@ -10,7 +10,6 @@
   function RunningReportController(RunningsService) {
     var vm = this;
     RunningsService.weeklyReports(function(reports) {
-      console.log(reports);
       vm.reports = reports;
     });
   }
