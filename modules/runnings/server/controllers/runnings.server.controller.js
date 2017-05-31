@@ -84,16 +84,47 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
   var where = {};
   if (req.user.roles.indexOf('admin') === -1) {
-    where = {};
+    where = { user: req.user };
   }
 
-  Running.find().sort('-created').populate('user', 'displayName').exec(function (err, runnings) {
+  Running.find(where).sort('-created').populate('user', 'displayName').exec(function (err, runnings) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
       res.json(runnings);
+    }
+  });
+};
+
+/**
+ * Weekly Report
+ */
+exports.weeklyReport = function (req, res) {
+  var where = {};
+  if (req.user.roles.indexOf('admin') === -1) {
+    where = { user: req.user._id };
+  }
+
+  Running.aggregate([
+    {
+      $match: where
+    },
+    {
+      $group: {
+        _id: { year: { $year: '$date' }, week: { $week: '$date' } },
+        totalDistance: { $sum: '$distance' },
+        totalDuration: { $sum: '$duration' }
+      }
+    }
+  ]).exec(function (err, reports) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(reports);
     }
   });
 };

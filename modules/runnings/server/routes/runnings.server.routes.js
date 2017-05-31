@@ -12,6 +12,10 @@ module.exports = function (app) {
     .get(runnings.list)
     .post(runnings.create);
 
+  // Runnings collection routes
+  app.route('/api/runnings/reports').all(runningsPolicy.isAllowed)
+    .get(runnings.weeklyReport);
+
   // Single running routes
   app.route('/api/runnings/:runningId').all(runningsPolicy.isAllowed)
     .get(runnings.read)

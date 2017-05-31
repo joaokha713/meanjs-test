@@ -13,6 +13,11 @@
     }, {
       update: {
         method: 'PUT'
+      },
+      weeklyReports: {
+        method: 'GET',
+        isArray: true,
+        url: '/api/runnings/reports'
       }
     });
 

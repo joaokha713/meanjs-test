@@ -14,5 +14,11 @@
       state: 'runnings.list',
       roles: ['user', 'admin']
     });
+
+    menuService.addMenuItem('topbar', {
+      title: 'Weekly Report',
+      state: 'runnings.report',
+      roles: ['user', 'admin']
+    });
   }
 }());

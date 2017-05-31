@@ -23,6 +23,15 @@
           roles: ['user', 'admin']
         }
       })
+      .state('runnings.report', {
+        url: '/reports',
+        templateUrl: '/modules/runnings/client/views/weekly-report.client.view.html',
+        controller: 'RunningReportController',
+        controllerAs: 'vm',
+        data: {
+          roles: ['user', 'admin']
+        }
+      })
       .state('runnings.create', {
         url: '/create',
         templateUrl: '/modules/runnings/client/views/form-running.client.view.html',

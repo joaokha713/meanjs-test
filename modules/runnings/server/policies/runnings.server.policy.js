@@ -20,6 +20,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/runnings/:runningId',
       permissions: '*'
+    }, {
+      resources: '/api/runnings/reports',
+      permissions: '*'
     }]
   }]);
 };
