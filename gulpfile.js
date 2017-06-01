@@ -450,7 +450,7 @@ gulp.task('build', function (done) {
 
 // Run the project tests
 gulp.task('test', function (done) {
-  runSequence('env:test', 'test:server', 'karma', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'test:server', done);
 });
 
 gulp.task('test:server', function (done) {
@@ -460,10 +460,6 @@ gulp.task('test:server', function (done) {
 // Watch all server files for changes & run server tests (test:server) task on changes
 gulp.task('test:server:watch', function (done) {
   runSequence('test:server', 'watch:server:run-tests', done);
-});
-
-gulp.task('test:client', function (done) {
-  runSequence('env:test', 'lint', 'dropdb', 'karma', done);
 });
 
 gulp.task('test:e2e', function (done) {
